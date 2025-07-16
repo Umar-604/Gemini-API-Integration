@@ -13,3 +13,11 @@ def ask_gemini(prompt):
         return response.text
     except Exception as e:
         return f"Error: {e}"
+
+if __name__ == "__main__":
+    print("🧬 Welcome to Gemini Chat. Type 'exit' to quit.")
+    while True:
+        user_input = input("You: ")
+        if user_input.lower() == 'exit':
+            break
+        print("Gemini:", ask_gemini(user_input))
