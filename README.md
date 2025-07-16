@@ -1,195 +1,128 @@
-# Gemini-API-Integration
+## 🧬 Gemini Chatbot
 
-Here's a complete and professional `README.md` file for your project, documenting all **3 phases**:
-
----
-
-## 🧬 Gemini Chatbot – Flask + Gemini API + Web UI
-
-A smart, full-stack chatbot powered by **Google Gemini API**, with a Python backend (Flask) and a modern, responsive HTML/CSS/JS frontend.
+**A full-stack AI assistant** using the [Google Gemini API](https://ai.google.dev), built with Python (Flask) and a modern HTML/CSS/JS frontend.
 
 ---
 
-## 📂 Project Structure
+## 📌 Overview
+
+This project has 3 main phases:
+
+| Phase       | Description                                                                 |
+| ----------- | --------------------------------------------------------------------------- |
+| **Phase 1** | CLI chatbot using Gemini API and Python                                     |
+| **Phase 2** | Flask API (`/ask`) for programmatic question/answer interaction             |
+| **Phase 3** | Beautiful front-end UI with chat bubbles, avatars, animations, and JS logic |
+
+---
+
+## 🧱 Project Structure
 
 ```
 Phentech/
-├── app.py                # Flask backend
-├── config.py             # Gemini API key
+├── app.py               # Flask API for Gemini
+├── config.py            # Stores Gemini API key
+├── main.py              # CLI version of Gemini chat
 ├── templates/
-│   └── index.html        # Chat frontend UI
+│   └── index.html       # Web frontend interface
 ├── static/
-│   ├── style.css         # Custom chat styling
-│   └── script.js         # JavaScript for messaging
-├── venv/                 # Python virtual environment
-└── README.md             # Documentation
+│   ├── style.css        # Responsive UI styling
+│   └── script.js        # Frontend logic (chat sending)
+└── README.md            # Project documentation
 ```
 
 ---
 
-## 🚀 Phase 1 – CLI Gemini Chat (Terminal)
+## ✅ How to Run
 
-Interact with Gemini from the command line using Python.
-
-### ✅ Setup
-
-1. **Install packages:**
+1. **Clone the repo** & activate virtual environment:
 
    ```bash
+   git clone https://github.com/your-username/gemini-chatbot.git
+   cd gemini-chatbot
    python3 -m venv venv
    source venv/bin/activate
-   pip install google-generativeai
    ```
 
-2. **Create `config.py`:**
-
-   ```python
-   GEMINI_API_KEY = "your_real_api_key"
-   ```
-
-3. **Create `main.py`:**
-
-   ```python
-   import google.generativeai as genai
-   from config import GEMINI_API_KEY
-
-   genai.configure(api_key=GEMINI_API_KEY)
-   model = genai.GenerativeModel("gemini-2.5-pro")
-
-   print("🧬 Welcome to Gemini Chat. Type 'exit' to quit.")
-   while True:
-       prompt = input("You: ")
-       if prompt.lower() == "exit":
-           break
-       response = model.generate_content(prompt)
-       print("Gemini:", response.text)
-   ```
-
-4. **Run it:**
+2. **Install dependencies:**
 
    ```bash
-   python main.py
+   pip install -r requirements.txt
    ```
 
----
-
-## 🌐 Phase 2 – Flask REST API + Postman
-
-Expose Gemini's power via an HTTP API you can test with Postman.
-
-### ✅ Setup
-
-1. **Install Flask:**
-
-   ```bash
-   pip install flask
-   ```
-
-2. **Update `app.py`:**
+3. **Add your API key to `config.py`:**
 
    ```python
-   from flask import Flask, request, jsonify
-   import google.generativeai as genai
-   from config import GEMINI_API_KEY
-
-   genai.configure(api_key=GEMINI_API_KEY)
-   model = genai.GenerativeModel("gemini-2.5-pro")
-
-   app = Flask(__name__)
-
-   @app.route("/ask", methods=["POST"])
-   def ask():
-       data = request.get_json()
-       question = data.get("question", "")
-       if not question:
-           return jsonify({"error": "No question provided"}), 400
-       try:
-           response = model.generate_content(question)
-           return jsonify({"response": response.text})
-       except Exception as e:
-           return jsonify({"error": str(e)}), 500
-
-   if __name__ == "__main__":
-       app.run(debug=True)
+   GEMINI_API_KEY = "your_gemini_api_key"
    ```
 
-3. **Test in Postman:**
+4. **Run the Flask server:**
 
-* URL: `http://127.0.0.1:5000/ask`
-* Method: `POST`
-* Body (JSON):
+   ```bash
+   python app.py
+   ```
 
-  ```json
-  {
-    "question": "What is machine learning?"
-  }
-  ```
+5. Open in browser:
+   👉 [http://127.0.0.1:5000](http://127.0.0.1:5000)
 
 ---
 
-## 💬 Phase 3 – Beautiful Frontend (HTML/CSS/JS)
+## 📬 Testing the API
 
-User-friendly chat interface with avatars, animations, and mobile support.
+You can test the `/ask` endpoint using **Postman** or **cURL**:
 
-### ✅ Folder Structure
+```http
+POST http://localhost:5000/ask
+Content-Type: application/json
 
-```
-templates/index.html
-static/style.css
-static/script.js
-```
-
-### ✅ Key Features
-
-* Modern layout with avatars
-* Auto-scroll and smooth chat
-* Responsive mobile-friendly design
-* Gemini "thinking" indicator
-* Enter key support
-
-### 🖥️ Preview UI
-
-![](https://user-images.githubusercontent.com/placeholder/mockup.png) <!-- You can replace with actual screenshot -->
-
-### ✅ How to Run
-
-```bash
-python app.py
-```
-
-Then open: [http://127.0.0.1:5000](http://127.0.0.1:5000)
-
----
-
-## 🔒 Configuration
-
-All secrets are stored in `config.py`:
-
-```python
-GEMINI_API_KEY = "your_api_key_here"
-```
-
-To get your Gemini API key:
-
-* Visit: [https://makersuite.google.com/app/apikey](https://makersuite.google.com/app/apikey)
-
----
-
-## 📦 Requirements
-
-```bash
-pip install flask google-generativeai
+{
+  "question": "Tell me about quantum computing"
+}
 ```
 
 ---
 
-## 🧠 Future Improvements
+## ✨ Features
 
-* ✅ Dark mode toggle
-* ✅ Chat history (localStorage or database)
-* 🖼️ Gemini Vision (image support)
-* 🔐 Login with Google (OAuth)
-* 🚀 Deployment to Render or Railway
+* Google Gemini 2.5 Pro integration
+* Modern responsive UI (mobile-friendly)
+* Chat bubble styling with avatars
+* Auto-scroll and Enter key support
+* Gemini “typing…” status indicator
+* Clean folder structure for production
+
+---
+
+## 📁 Key Files (Click to View)
+
+| File                                             | Purpose                                 |
+| ------------------------------------------------ | --------------------------------------- |
+| [`main.py`](./main.py)                           | CLI chatbot via terminal                |
+| [`app.py`](./app.py)                             | Flask API server                        |
+| [`templates/index.html`](./templates/index.html) | Web UI markup                           |
+| [`static/style.css`](./static/style.css)         | CSS styling for chat layout             |
+| [`static/script.js`](./static/script.js)         | JS logic for sending/receiving messages |
+
+---
+
+## 🔐 Gemini API Key Setup
+
+1. Go to: [https://makersuite.google.com/app/apikey](https://makersuite.google.com/app/apikey)
+2. Create a `config.py` file with:
+
+   ```python
+   GEMINI_API_KEY = "your_api_key_here"
+   ```
+
+---
+
+## 🚀 Future Ideas
+
+* 🌓 Dark mode toggle
+* 🖼️ Gemini Vision image support
+* 📜 Save chat history (session/localStorage)
+* 🔐 User login via OAuth
+* 📱 Convert to PWA (mobile app feel)
 
 ---
 
@@ -197,8 +130,3 @@ pip install flask google-generativeai
 
 **Umar Tariq**
 Cybersecurity & AI Developer
-Project under: **PhenTech Private Limited** Internship (Machine Learning Department)
-
----
-
-Let me know if you want the actual `.zip`, deployment guide, or real screenshot placeholder for your GitHub repo!
