@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gemini Chat Assistant</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="icon" href="{{ url_for('static', filename='gemini_icon.png') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+  <div class="main-layout">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <a href="/" class="new-chat-btn">
+          <i class="fas fa-plus"></i> New Chat
+        </a>
+      </div>
+      <nav class="chat-history-nav">
+        <ul>
+          {% for chat in chats %}
+          <li>
+            <a href="#" class="chat-link" data-chat-id="{{ chat.id }}">
+              {{ chat.question.split('\n')[0][:50] }}
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="user-profile-dropdown">
+          <i class="fas fa-user-circle profile-icon"></i>
+          <div class="dropdown-content">
+            <div class="dropdown-header">Signed in as</div>
+            <strong>{{ username }}</strong>
+            <a href="{{ url_for('logout') }}" id="logout-link">Sign out</a>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <main class="chat-container">
+      <section id="chat-box" class="chat-box" aria-live="polite" aria-label="Chat messages">
+        <!-- Dynamic chat content will be appended here -->
+      </section>
+      <form id="chat-form" class="chat-form" autocomplete="off" aria-label="Send a message">
+        <div class="input-icon-group">
+          <span class="input-icon"><i class="fas fa-search"></i></span>
+          <input type="text" id="question" placeholder="Ask something..." autocomplete="off" required aria-label="Type your message" />
+        </div>
+        <button type="submit" aria-label="Send" class="go-btn">Go</button>
+      </form>
+    </main>
+  </div>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
