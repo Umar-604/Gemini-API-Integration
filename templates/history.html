@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chat History</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <main class="chat-history-container">
+    <h2 style="margin-bottom: 18px; font-weight: 600; color: #6366f1; font-size: 1.4rem; letter-spacing: 0.5px;">📜 Chat History</h2>
+
+    {% if chats and chats|length > 0 %}
+      <ul class="chat-history-list">
+        {% for chat in chats %}
+          <li class="chat-entry">
+            <strong>🧠 You:</strong> {{ chat.question }}<br>
+            <strong>🤖 Gemini:</strong> {{ chat.response }}<br>
+            <hr>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No chat history found.</p>
+    {% endif %}
+
+    <a href="/" class="btn" aria-label="Back to Chat">← Back to Chat</a>
+  </main>
+</body>
+</html>
