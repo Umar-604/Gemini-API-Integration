@@ -1,0 +1,99 @@
+body {
+  background: linear-gradient(135deg, #e0e7ff 0%, #f8fafc 100%);
+  min-height: 100vh;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.login-card {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(60, 72, 100, 0.15);
+  padding: 40px 32px 32px 32px;
+  max-width: 370px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+.login-card img {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  margin-bottom: 8px;
+  box-shadow: 0 2px 8px rgba(60, 72, 100, 0.08);
+}
+.login-card h2 {
+  color: #6366f1;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 6px 0;
+  letter-spacing: 0.5px;
+}
+.login-card p.subtext {
+  color: #64748b;
+  font-size: 1rem;
+  margin: 0 0 10px 0;
+}
+.login-card form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.login-card input[type="text"],
+.login-card input[type="password"] {
+  width: 100%;
+  padding: 13px 16px;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 10px;
+  background: #f8fafc;
+  font-size: 1rem;
+  transition: border 0.2s;
+}
+.login-card input[type="text"]:focus,
+.login-card input[type="password"]:focus {
+  border: 1.5px solid #6366f1;
+  outline: none;
+}
+.login-card button {
+  background: linear-gradient(135deg, #6366f1 60%, #818cf8 100%);
+  border: none;
+  color: white;
+  padding: 12px 0;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-top: 6px;
+  transition: background 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(60, 72, 100, 0.10);
+}
+.login-card button:hover {
+  background: linear-gradient(135deg, #4f46e5 60%, #6366f1 100%);
+  box-shadow: 0 4px 16px rgba(60, 72, 100, 0.13);
+}
+.login-card .error {
+  color: #ef4444;
+  font-size: 1rem;
+  margin-bottom: 0;
+  text-align: center;
+}
+.login-card .switch-link {
+  margin-top: 10px;
+  font-size: 1rem;
+  color: #64748b;
+  text-align: center;
+}
+.login-card .switch-link a {
+  color: #6366f1;
+  text-decoration: none;
+  font-weight: 600;
+  margin-left: 4px;
+}
+.login-card .switch-link a:hover {
+  text-decoration: underline;
+} 
